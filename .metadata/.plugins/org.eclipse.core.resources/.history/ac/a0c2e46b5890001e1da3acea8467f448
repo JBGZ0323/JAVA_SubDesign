@@ -1,0 +1,87 @@
+package textsystem;
+import java.io.*;
+import jxl.*;
+import java.util.*;
+import javax.swing.JOptionPane;
+
+public class RamdomInitTestPaper implements GiveTestPaper {
+	//将试题放入试卷（出卷）
+	TestPaper testPaper;   //试卷
+	File fileExcel;
+	Problem [] problem;   //组成试卷的一套题，problem的单元存放一道题，即一个problem对象
+	InputStream in = null;
+	Workbook wb = null;   //封装Excel，Workbook是jxl包中的类
+	Sheet sheet =null;    //封装Excel中的sheet，sheet是jxl包中的类
+	LinkedList<Integer> list;   //随机抽取试题时用
+	
+	//RamdomInitTestPaper
+	public RamdomInitTestPaper() {
+		testPaper = new TestPaper();
+		list = new LinkedList<Integer>();
+	}
+	
+	//getTestPaper
+	public TestPaper getTestPaper(String excelFileName, int amount) {
+		boolean b = setExcel(excelFileName);   //设置用户存放试题的电子表格
+		if(b) {
+			try {
+				randomGiveProblem(amount);   //随机给出amount道试题，见类后面的random GiveProblem
+			}
+			catch(ArrayIndexOutOfBoundsException e) {
+				System.out.println("试题必须有类型，请检查题库");
+				System.exit(0);
+			}
+			testPaper.setProblem(problem);   //试卷上设置的一套试题是problem
+			return testPaper;                //返回试卷
+		}
+		else {
+			JOptionPane.showMessageDialog(null,"没有预备题库","消息对话框",JOptionPane.WARNING_MESSAGE);
+			return null;
+		}
+	}
+	
+	//setExcel
+	private boolean setExcel(String excelFileName) {
+		boolean b = ture;
+		try {
+			fileExcel = new File(excelFileName);
+			in = new FileInputSream(fileExcel);
+			testPaper.setProblemSource(fileExcel.getAbsolutePath());   //试卷设置题库来源
+		}
+		catch(IOException exp) {
+			JOptionPane.showMessageDialog(null,"没有预备题库Excel","消息对话框",JOptionPane.WARNING_MESSAGE);
+			b = false;
+		}
+		try {
+			wb = Workbook.getWorkbook(in);
+			in.close();
+		}
+		catch(Exception exp) {
+			b = false;
+		}
+		return b;
+	}
+	
+	//randomGiveProblem
+	//随机给出amount道试题放入problem数组中
+	private void randomGiveProblem(int amount) {
+		list.clear();
+		if(wb == null) {
+			JOptionPane.showMessageDialog(null,"没有预备题库Excel","消息对话框",JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		sheet = wb.getSheet(0);             //得到Excel中的第一个sheet（从0开始索引）
+		int rowsAmount = sheet.getRows();   //得到sheet的总行数
+		//注意原始Excel表中sheet中的第0行不是试题，是用户输入的说明
+		int realAmount = Math.min(amount, rowsAmount-1);   //实际抽取的试题数量
+		problem = new Problem[realAmount];                 //用于存放试题的数组problem
+		//将1~rowsAmount-1放入链表
+		for(int i = 0; i < rowsAmount-1; i++) {
+			list.add(i+1);
+		}
+		Random random = new Random();
+		for(int i = 0; i < problem.length; i++) {
+			//2023.11.30从这里继续编程，P112
+		}
+	}
+}

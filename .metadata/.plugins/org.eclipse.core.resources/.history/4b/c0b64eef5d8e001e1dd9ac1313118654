@@ -1,0 +1,19 @@
+package textsystem;
+import javax.swing.*;
+public class TeacherOne implements Teacher {
+	public void giveTextPaparScore(TextPaper textPaper) {
+		int correctAmount = 0;   //按百分比记录分数
+		if(testpaper == null) {
+			JOptionPane.showMessageDialog
+			(null,"没问题","消息对话框",JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		Problem p [] = testPaper.getAllProblem();
+		if(p == null || p.length == 0) {
+			JOptionPane.showMessageDialog
+			(null,"没问题","消息对话框",JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		
+	}
+}

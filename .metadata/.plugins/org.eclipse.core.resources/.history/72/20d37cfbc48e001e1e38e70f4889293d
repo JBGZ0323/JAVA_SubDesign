@@ -1,0 +1,13 @@
+package textsystem;
+import java.io.*;
+import jxl.*;
+import java.util.*;
+import javax.swing.JOptionPane;
+
+public class RamdomInitTestPaper implements GiveTestPaper {
+	//将试题放入试卷（出卷）
+	TestPaper testPaper;   //试卷
+	File fileExcel;
+	Problem [] problem;   //组成试卷的一套题，problem的单元存放一道题，即一个problem对象
+	InputStream in = null;
+}

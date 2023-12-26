@@ -1,0 +1,5 @@
+package textsystem;
+
+public interface GiveTestPaper {
+	public TextPaper getTest
+}

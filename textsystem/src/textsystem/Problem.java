@@ -2,14 +2,14 @@
 
 //Problem类
 public class Problem {
-	boolean isChoice;   //是否为选择题
-	boolean isJudge;    //是否为判断题
-	String content;     //题目内容
-	String giveChoiceA,giveChoiceB,giveChoiceC,giveChoiceD;   //提供A-D的四种选择
-	String imageName;   //题目所带的图像文件的名字
-	String correctAnswer = "QWEQ@#$@!@#1QWEQ";   //题目的正确答案
+	private boolean isChoice;   //是否为选择题
+	private boolean isJudge;    //是否为判断题
+	private String content;     //题目内容
+	private String giveChoiceA,giveChoiceB,giveChoiceC,giveChoiceD;   //提供A-D的四种选择
+	private String imageName;   //题目所带的图像文件的名字
+	private String correctAnswer = "QWEQ@#$@!@#1QWEQ";   //题目的正确答案
 	//用户回答的初始答案和correctAnswer不同，防止出题人忘记给正确答案
-	String userAnswer = "";   //初始值必须是不含任何字符的串
+	private String userAnswer = "";   //初始值必须是不含任何字符的串
 	
 	public boolean getIsChoice() {
 		return isChoice;
